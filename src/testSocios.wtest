@@ -1,0 +1,32 @@
+import actividades.*
+import socios.*
+
+describe "Socios" {
+	const roque = new SocioTranquilo(maximoDeActs = 2, edad = 42, idiomasQueHabla = ["Español"])
+	const ana = new SocioTranquilo(maximoDeActs = 3, edad = 62, idiomasQueHabla = ["Español"])
+	const viajePlaya1 = new ViajePlaya(largoDePlaya = 1000)
+	const viajePlaya2 = new ViajePlaya(largoDePlaya = 2000)
+	const claseDeGim = new ClaseDeGimnasia()
+	
+	method initialize(){
+		roque.realizarActividad(viajePlaya1)
+		roque.realizarActividad(viajePlaya2)
+		ana.realizarActividad(viajePlaya1)
+		ana.realizarActividad(viajePlaya2)
+		ana.realizarActividad(claseDeGim)
+	}
+	
+	test "Test de Roque"{
+		assert.that(roque.adoradorDelSol())
+		assert.equals([viajePlaya2],roque.actividadesEsforzadas())
+	}
+	
+	test "Roque realiza una clase de Gimnasia"{
+		assert.throwsExceptionWithMessage("Maximo de actividades alcanzado",{roque.realizarActividad(claseDeGim)})
+	}
+	
+	test "Test de Ana"{
+		assert.notThat(ana.adoradorDelSol())
+		assert.equals([viajePlaya2,claseDeGim],ana.actividadesEsforzadas())
+	}
+}

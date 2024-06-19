@@ -1,0 +1,57 @@
+import actividades.*
+
+test "ciudad normal con 4 atracciones" {
+	const ciudadNormal = new ExcursionALaCiudad(cantidadDeAtraccionesAVisitar = 4)
+	assert.equals(2, ciudadNormal.diasDeActividad())
+	assert.notThat(ciudadNormal.requiereEsfuerzo())
+	assert.notThat(ciudadNormal.sirveParaBroncearse())
+}
+
+test "ciudad tropical con 4 atracciones" {
+	const ciudadTropical = new ExcursionCiudadTropical(cantidadDeAtraccionesAVisitar = 4)
+	assert.equals(3, ciudadTropical.diasDeActividad())
+	assert.notThat(ciudadTropical.requiereEsfuerzo())
+	assert.that(ciudadTropical.sirveParaBroncearse())
+}
+
+test "otro viaje a ciudad normal con 8 atracciones" {
+	const ciudadNormal = new ExcursionALaCiudad(cantidadDeAtraccionesAVisitar = 8)
+	assert.equals(4, ciudadNormal.diasDeActividad())
+	assert.that(ciudadNormal.requiereEsfuerzo())
+	assert.notThat(ciudadNormal.sirveParaBroncearse())
+}
+
+test "otro viaje a ciudad tropical con 8 atracciones"{
+	const ciudadTropical= new ExcursionCiudadTropical(cantidadDeAtraccionesAVisitar = 8)
+	assert.equals(5, ciudadTropical.diasDeActividad())
+	assert.that(ciudadTropical.requiereEsfuerzo())
+	assert.that(ciudadTropical.sirveParaBroncearse())
+}
+
+test "otro viaje a ciudad tropical con 10 atracciones"{
+	const ciudadTropical= new ExcursionCiudadTropical(cantidadDeAtraccionesAVisitar = 10)
+	assert.equals(6, ciudadTropical.diasDeActividad())
+	assert.notThat(ciudadTropical.requiereEsfuerzo())
+	assert.that(ciudadTropical.sirveParaBroncearse())
+}
+
+test "salida de trekking de 100km" {
+	const salidaT = new SalidaDeTrekking(kilometrosDeSenderoARecorrer = 100, cantidadDeDiasDeSol = 130)
+	assert.equals(2, salidaT.diasDeActividad())
+	assert.that(salidaT.requiereEsfuerzo())
+	assert.notThat(salidaT.sirveParaBroncearse())
+}
+
+test "salida de trekking de 50km" {
+	const salidaT = new SalidaDeTrekking(kilometrosDeSenderoARecorrer = 50, cantidadDeDiasDeSol = 240)
+	assert.equals(1, salidaT.diasDeActividad())
+	assert.notThat(salidaT.requiereEsfuerzo())
+	assert.that(salidaT.sirveParaBroncearse())
+}
+
+test "salida de trekking de 250km" {
+	const salidaT = new SalidaDeTrekking(kilometrosDeSenderoARecorrer = 250, cantidadDeDiasDeSol = 130)
+	assert.equals(5, salidaT.diasDeActividad())
+	assert.that(salidaT.requiereEsfuerzo())
+	assert.that(salidaT.sirveParaBroncearse())
+}
